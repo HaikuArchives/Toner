@@ -84,7 +84,7 @@ void BufferProc(void *theCookie, void *buffer, size_t size, const media_raw_audi
 TonePlayer::TonePlayer(void) : BSoundPlayer  ("Toner", &BufferProc, NULL, NULL)
 {
 	//calculate initial values for phasor
-	double w = 2 * PI * INITIAL_FREQ / SAMPLE_RATE;
+	double w = 2 * M_PI * INITIAL_FREQ / SAMPLE_RATE;
 	p = 2.0 * cos(w);
 	q0 = sin(-2 * w);
 	q1 = sin(-w);
@@ -133,7 +133,7 @@ void
 TonePlayer::SetFrequency(int16 inFreq)
 {
 	//calculate phase change per sample, in radians
-	double w = 2 * PI * inFreq / SAMPLE_RATE;
+	double w = 2 * M_PI * inFreq / SAMPLE_RATE;
 
 	//change phase constant
 	p = 2.0 * cos(w);

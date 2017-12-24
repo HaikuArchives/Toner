@@ -53,7 +53,7 @@ TonerView::AttachedToWindow()
 	menu = new BPopUpMenu("Mute");
 	
 	int Level_Count = 5;
-	char *LevelText[] = {"Unity", "-3 dB", "-10 dB", "-20 dB", "Mute"};
+	const char *LevelText[] = {"Unity", "-3 dB", "-10 dB", "-20 dB", "Mute"};
 	int Level[] = {0, -3, -10, -20, LEVEL_MUTE};
 	
 	for (int i = 0; i < Level_Count; i++)
@@ -75,7 +75,7 @@ TonerView::AttachedToWindow()
 	menu = new BPopUpMenu("400 Hz");
 	
 	int Tone_Count = 14;
-	char *ToneText[] = {"20 Hz", "30 Hz", "40 Hz", "60 Hz", "80 Hz", "120 Hz", "240 Hz", "480 Hz", "1 kHz", "2 kHz", "4 kHz", "8 kHz", "16 kHz", "Pink"};
+	const char *ToneText[] = {"20 Hz", "30 Hz", "40 Hz", "60 Hz", "80 Hz", "120 Hz", "240 Hz", "480 Hz", "1 kHz", "2 kHz", "4 kHz", "8 kHz", "16 kHz", "Pink"};
 	int Tone[] = {20, 30, 40, 60, 80, 120, 240, 480, 1000, 2000, 4000, 8000, 16000, TONE_PINK};
 	
 	for (int i = 0; i < Tone_Count; i++)
