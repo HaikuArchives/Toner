@@ -10,10 +10,15 @@
 */
 
 #include "TonerWindow.h"
-#include "TonerView.h"
+#include "TonePlayer.h"
 
+#include <Alert.h>
 #include <Application.h>
 #include <LayoutBuilder.h>
+#include <Menu.h>
+#include <MenuField.h>
+#include <MenuItem.h>
+#include <PopUpMenu.h>
 
 enum 
 {
@@ -27,13 +32,7 @@ TonerWindow::TonerWindow() : BWindow(BRect(100, 100, 250, 180), "Toner v1.0", B_
 	Player->SetNoise(false);
 	Player->SetFrequency(400);
 	Player->SetLevel(LEVEL_MUTE);
-	
-//	TonerView *theView = new TonerView(BRect(0,0,0,0));
-//	AddChild(theView);
-	
-	//The view is no longer needed, just a place to hold things.
-//	theView->Hide();
-	
+		
 	//Create our menus
 	
 	CreateMenus();

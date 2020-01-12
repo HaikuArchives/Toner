@@ -28,18 +28,27 @@ APP_MIME_SIG = application/x-vnd.Be-BTL.Toner
 #	means this Makefile will not work correctly if two source files with the
 #	same name (source.c or source.cpp) are included from different directories.
 #	Also note that spaces in folder names do not work well with this Makefile.
-SRCS = TonerApp.cpp TonerWindow.cpp TonePlayer.cpp TonerView.cpp
+SRCS = \
+	 TonePlayer.cpp  \
+	 TonerApp.cpp  \
+	 TonerWindow.cpp  \
+
 
 #	Specify the resource definition files to use. Full or relative paths can be
 #	used.
-RDEFS = Toner.rdef
+RDEFS = \
+	 Toner.rdef  \
+
 
 #	Specify the resource files to use. Full or relative paths can be used.
 #	Both RDEFS and RSRCS can be utilized in the same Makefile.
-RSRCS = 
+RSRCS = \
+
 
 # End Pe/Eddie support.
 # @<-src@
+#%}
+
 #%}
 
 #	Specify libraries to link against.
