@@ -1,5 +1,5 @@
 /*
-	
+
 	TonerApp.h
 
 */
@@ -13,7 +13,7 @@
 
 class TonerWindow;
 
-class TonerApp : public BApplication 
+class TonerApp : public BApplication
 {
 public:
 					TonerApp(void);

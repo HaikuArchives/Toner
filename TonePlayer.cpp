@@ -1,7 +1,7 @@
 /*
-	
+
 	TonePlayer.cpp
-	
+
 */
 /*
 	Originally written by Ben Loftis.
@@ -9,7 +9,7 @@
 	If you use this source extensively in your project, I humbly request that you credit me in your program.
 */
 
-#include "TonePlayer.h" 
+#include "TonePlayer.h"
 #include <Alert.h>
 #include "math.h"
 #include "stdlib.h"
@@ -19,9 +19,9 @@
 #define GAIN_CORRECTION 0.13			//the pink noise filter has a lot of gain....use this to cut back
 #define RAMP_TIME 11025.0				//ramp volume over several milliseconds so there's no pop or click
 
-	void		BufferProc(void *theCookie, void *buffer, size_t size, const media_raw_audio_format &format); //adds data to buffer 
+	void		BufferProc(void *theCookie, void *buffer, size_t size, const media_raw_audio_format &format); //adds data to buffer
 	double		NextSample();
-	
+
 	float		TargetLevel = 0;
 	float		TargetToneLevel, ToneLevel, ToneIncrement;
 	float		TargetNoiseLevel, NoiseLevel, NoiseIncrement;
@@ -39,24 +39,24 @@ NextSample()
    return q2;
 }
 
-void BufferProc(void *theCookie, void *buffer, size_t size, const media_raw_audio_format &format) 
-{ 
+void BufferProc(void *theCookie, void *buffer, size_t size, const media_raw_audio_format &format)
+{
 	//we're not smart enough to handle different sample rates / formats
-	if (format.format != media_raw_audio_format::B_AUDIO_FLOAT) return; 
+	if (format.format != media_raw_audio_format::B_AUDIO_FLOAT) return;
 	if (format.frame_rate != SAMPLE_RATE) return;
-	
+
 	//convert the buffer data into handy values
-	float *buf = (float *) buffer; 
-	ChannelCount = format.channel_count; 
-	NumSamples = size / 4; 
-  
+	float *buf = (float *) buffer;
+	ChannelCount = format.channel_count;
+	NumSamples = size / 4;
+
 	//calculate volume envelopes so we don't get pops or clicks
 	ToneIncrement = (TargetToneLevel - ToneLevel) / RAMP_TIME;
 	NoiseIncrement = (TargetNoiseLevel - NoiseLevel) / RAMP_TIME;
 
 	//iterate through buffer & fill with audio data
-	for (size_t i = 0; i < NumSamples; i += ChannelCount) 
-	{ 
+	for (size_t i = 0; i < NumSamples; i += ChannelCount)
+	{
 		//Apply tone
 		buf[i] = ToneLevel * NextSample();
 
@@ -69,8 +69,8 @@ void BufferProc(void *theCookie, void *buffer, size_t size, const media_raw_audi
 		b4 = 0.55000 * b4 + white * 0.5329522;
 		b5 = -0.7616 * b5 - white * 0.0168980;
 		buf[i] += GAIN_CORRECTION * NoiseLevel * (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362);
-		b6 = white * 0.115926;		
-				
+		b6 = white * 0.115926;
+
 		//Fill other channel(s)
 		for (uint j = 1; j < ChannelCount; j++)
 			buf[i + j] = buf[i];
@@ -98,7 +98,7 @@ TonePlayer::TonePlayer(void) : BSoundPlayer  ("Toner", &BufferProc, NULL, NULL)
 }
 
 void
-TonePlayer::SetNoiseMix() 
+TonePlayer::SetNoiseMix()
 {
 	if (Noise)
 	{
@@ -110,25 +110,25 @@ TonePlayer::SetNoiseMix()
 		TargetNoiseLevel = 0;
 		TargetToneLevel = TargetLevel;
 	}
-} 
- 
+}
+
 void
-TonePlayer::SetNoise(bool inNoise) 
+TonePlayer::SetNoise(bool inNoise)
 {
 	Noise = inNoise;
 
 	SetNoiseMix();
-} 
- 
+}
+
 void
-TonePlayer::SetLevel(int16 inLevel_dB) 
+TonePlayer::SetLevel(int16 inLevel_dB)
 {
 	//convert dB's into a scaling factor, 0-1
 	TargetLevel = pow(10.0, inLevel_dB / 20.0);
-	
+
 	SetNoiseMix();
-} 
- 
+}
+
 void
 TonePlayer::SetFrequency(int16 inFreq)
 {

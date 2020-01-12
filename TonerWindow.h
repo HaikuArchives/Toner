@@ -1,7 +1,7 @@
 /*
-	
+
 	TonerWindow.h
-	
+
 */
 /*
 	Originally written by Ben Loftis.
@@ -14,12 +14,21 @@
 #ifndef TONER_WINDOW_H
 #define TONER_WINDOW_H
 
-class TonerWindow : public BWindow  
+class TonePlayer;
+class BMenuField;
+
+class TonerWindow : public BWindow
 {
 public:
-			TonerWindow();
+					TonerWindow();
+					~TonerWindow();
 private:
-	bool	QuitRequested(void);
+	bool			QuitRequested(void);
+	TonePlayer		*Player;
+	void			MessageReceived(BMessage *inMessage);
+	void			CreateMenus();
+	BMenuField		*mnuLevel;
+	BMenuField		*mnuFreq;
 };
 
 #endif
