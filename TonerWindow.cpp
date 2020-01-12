@@ -26,14 +26,13 @@ enum
 	Cmd_Freq,
 };
 
-TonerWindow::TonerWindow() : BWindow(BRect(100, 100, 250, 180), "Toner v1.0", B_TITLED_WINDOW, B_NOT_RESIZABLE | B_WILL_ACCEPT_FIRST_CLICK |  B_AUTO_UPDATE_SIZE_LIMITS)
+TonerWindow::TonerWindow() : BWindow(BRect(100, 100, 250, 180), "Toner",
+	B_TITLED_WINDOW, B_NOT_RESIZABLE | B_WILL_ACCEPT_FIRST_CLICK |  B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	Player = new TonePlayer();
 	Player->SetNoise(false);
 	Player->SetFrequency(400);
 	Player->SetLevel(LEVEL_MUTE);
-		
-	//Create our menus
 	
 	CreateMenus();
 	
@@ -128,7 +127,9 @@ TonerWindow::CreateMenus()
 	menu = new BPopUpMenu("400 Hz");
 	
 	int Tone_Count = 14;
-	const char *ToneText[] = {"20 Hz", "30 Hz", "40 Hz", "60 Hz", "80 Hz", "120 Hz", "240 Hz", "480 Hz", "1 kHz", "2 kHz", "4 kHz", "8 kHz", "16 kHz", "Pink"};
+	const char *ToneText[] = 
+	{"20 Hz", "30 Hz", "40 Hz", "60 Hz", "80 Hz", "120 Hz", "240 Hz", 
+	"480 Hz", "1 kHz", "2 kHz", "4 kHz", "8 kHz", "16 kHz", "Pink"};
 	int Tone[] = {20, 30, 40, 60, 80, 120, 240, 480, 1000, 2000, 4000, 8000, 16000, TONE_PINK};
 	
 	for (int i = 0; i < Tone_Count; i++)
