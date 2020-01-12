@@ -17,9 +17,15 @@
 class TonerWindow : public BWindow  
 {
 public:
-			TonerWindow();
+					TonerWindow();
+					~TonerWindow();
 private:
-	bool	QuitRequested(void);
+	bool			QuitRequested(void);
+	TonePlayer		*Player;
+	void			MessageRecieved(BMessage *inMessage);
+	void			CreateMenus();
+	BMenuField		*mnuLevel;
+	BMenuField		*mnuFreq;
 };
 
 #endif

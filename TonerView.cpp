@@ -21,105 +21,19 @@
 #include <Bitmap.h>
 #include <TranslationUtils.h>
 #include <LayoutBuilder.h>
- 
-enum 
-{
-	Cmd_Level	= 'cm00',
-	Cmd_Freq,
-};
 
 TonerView::TonerView(BRect rect) : BView(rect, "TonerView", B_FOLLOW_ALL_SIDES, B_WILL_DRAW) 
 { 
-	Player = new TonePlayer();
-	Player->SetNoise(false);
-	Player->SetFrequency(400);
-	Player->SetLevel(LEVEL_MUTE);
+
 }
 
 void
 TonerView::AttachedToWindow() 
 {
-	//Add level & tone menus
-	BMenu *menu;
-	BMenuItem *theItem;
-	BMessage *theMessage;
-	
-	/*    ----------------    The Level Menu    --------------           */
-	
-	menu = new BPopUpMenu("Mute");
-	
-	int Level_Count = 5;
-	const char *LevelText[] = {"Unity", "-3 dB", "-10 dB", "-20 dB", "Mute"};
-	int Level[] = {0, -3, -10, -20, LEVEL_MUTE};
-	
-	for (int i = 0; i < Level_Count; i++)
-	{
-		theMessage = new BMessage(Cmd_Level);
-		theMessage->AddInt16("level", Level[i]);
-		theItem = new BMenuItem(LevelText[i], theMessage);
-		theItem->SetTarget(this);
-		menu->AddItem(theItem);
-	}
-	
- 	mnuLevel = new BMenuField("Level:", menu);
-	
-	/*    ----------------    The Tone Menu    --------------           */
 
-	menu = new BPopUpMenu("400 Hz");
-	
-	int Tone_Count = 14;
-	const char *ToneText[] = {"20 Hz", "30 Hz", "40 Hz", "60 Hz", "80 Hz", "120 Hz", "240 Hz", "480 Hz", "1 kHz", "2 kHz", "4 kHz", "8 kHz", "16 kHz", "Pink"};
-	int Tone[] = {20, 30, 40, 60, 80, 120, 240, 480, 1000, 2000, 4000, 8000, 16000, TONE_PINK};
-	
-	for (int i = 0; i < Tone_Count; i++)
-	{
-		theMessage = new BMessage(Cmd_Freq);
-		theMessage->AddInt16("freq", Tone[i]);
-		theItem = new BMenuItem(ToneText[i], theMessage);
-		theItem->SetTarget(this);
-		menu->AddItem(theItem);
-	}
-	
- 	mnuFreq = new BMenuField("Tone:", menu);
 }
 
 TonerView::~TonerView()
 {
-	delete Player;
-}
 
-
-void
-TonerView::MessageReceived(BMessage *inMessage)
-{
-	switch ( inMessage->what )
-	{
-		case Cmd_Level:
-		{
-			int16 theLevel;
-			if ( inMessage->FindInt16("level", &theLevel) == 0 )
-				Player->SetLevel(theLevel);
-		}
-		break;
-		
-		case Cmd_Freq:
-		{
-			int16 theFreq;
-			if ( inMessage->FindInt16("freq", &theFreq) == 0 )
-			{
-				if (theFreq < 10)
-					Player->SetNoise(true);
-				else
-				{
-					Player->SetNoise(false);
-					Player->SetFrequency(theFreq);
-				}
-			}
-		}
-		break;
-		
-		default:
-			BView::MessageReceived(inMessage);
-		break;
-	}
 }
