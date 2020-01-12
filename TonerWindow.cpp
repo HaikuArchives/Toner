@@ -13,11 +13,26 @@
 #include "TonerView.h"
 
 #include <Application.h>
-
-TonerWindow::TonerWindow() : BWindow(BRect(100, 100, 220, 170), "Toner v1.0", B_TITLED_WINDOW, B_NOT_RESIZABLE | B_WILL_ACCEPT_FIRST_CLICK |  B_AUTO_UPDATE_SIZE_LIMITS)
+#include <LayoutBuilder.h>
+//Old values are 220 and 170
+TonerWindow::TonerWindow() : BWindow(BRect(100, 100, 250, 180), "Toner v1.0", B_TITLED_WINDOW, B_NOT_RESIZABLE | B_WILL_ACCEPT_FIRST_CLICK |  B_AUTO_UPDATE_SIZE_LIMITS)
 {
-	TonerView *theView = new TonerView( Bounds() );
+	TonerView *theView = new TonerView(BRect(0,0,0,0));
 	AddChild(theView);
+	
+	//The view is no longer needed, just a place to hold things.
+	theView->Hide();
+	
+	//Building the main layout.
+	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
+		.AddGrid(B_USE_DEFAULT_SPACING, B_USE_SMALL_SPACING)
+			.AddMenuField(theView -> mnuLevel, 0, 0, B_ALIGN_LEFT)
+			.AddMenuField(theView -> mnuFreq, 0, 1, B_ALIGN_LEFT)
+			.End()
+		.AddGlue()
+		.SetInsets(B_USE_WINDOW_SPACING, B_USE_DEFAULT_SPACING,
+					B_USE_WINDOW_SPACING, B_USE_DEFAULT_SPACING)
+		.End();
 }
 
 bool

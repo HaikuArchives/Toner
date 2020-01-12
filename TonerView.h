@@ -16,13 +16,15 @@
 
 class TonePlayer;
 class BMessage;
+class BMenuField;
 
 class TonerView : public BView
 {
 public:
 					TonerView(BRect frame); 
 					~TonerView(); 
-
+	BMenuField		*mnuLevel;
+	BMenuField		*mnuFreq;
 private:	
 	void			AttachedToWindow();
 	void			MessageReceived (BMessage *inMessage);
