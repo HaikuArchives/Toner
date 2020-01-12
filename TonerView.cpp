@@ -37,11 +37,13 @@ TonerView::TonerView(BRect rect) : BView(rect, "TonerView", B_FOLLOW_ALL_SIDES, 
 
 void
 TonerView::AttachedToWindow() 
-{ 
-	//Load & display the background bitmap
-	BBitmap *theBitmap = BTranslationUtils::GetBitmap('BMP ', 1);
-	if (theBitmap != NULL)
-		SetViewBitmap(theBitmap);
+{ //We have to change things here only.....
+//	//Load & display the background bitmap
+//	BBitmap *theBitmap = BTranslationUtils::GetBitmap('BMP ', 1);
+//	if (theBitmap != NULL)
+//		SetViewBitmap(theBitmap);
+// We'll have to remove the bitmap, as the words are hard-printed onto the bitmap,
+// which is not what we want.
 	
 	//add level & tone menus
 	BMenu *menu;
@@ -65,9 +67,12 @@ TonerView::AttachedToWindow()
 		menu->AddItem(theItem);
 	}
 	
-	BMenuField *mnuLevel = new BMenuField(BRect (46, 10, 140, 60), "", "", menu);
-	mnuLevel->SetDivider(0);
-	AddChild(mnuLevel);
+//	BMenuField *mnuLevel = new BMenuField(BRect (46, 10, 140, 60), "", "", menu);
+//	mnuLevel->SetDivider(0);
+
+ 	BMenuField *mnuLevel = new BMenuField("Level:", menu);
+	
+//	AddChild(mnuLevel);
 	
 	
 	/*    ----------------    The Tone Menu    --------------           */
@@ -87,9 +92,22 @@ TonerView::AttachedToWindow()
 		menu->AddItem(theItem);
 	}
 	
-	BMenuField *mnuFreq = new BMenuField(BRect (46, 40, 160, 100), "", "", menu);
-	mnuFreq->SetDivider(0);
-	AddChild(mnuFreq);
+//	BMenuField *mnuFreq = new BMenuField(BRect (46, 40, 160, 100), "", "", menu);
+//	mnuFreq->SetDivider(0);
+
+ 	BMenuField *mnuFreq = new BMenuField("Tone:", menu);
+
+//	AddChild(mnuFreq);
+
+//	Attempting to build the layout
+	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
+		.AddGrid(B_USE_DEFAULT_SPACING, B_USE_SMALL_SPACING)
+			.AddMenuField(mnuLevel, 0, 0, B_ALIGN_LEFT)
+			.AddMenuField(mnuFreq, 0, 0, B_ALIGN_LEFT)
+		.AddGlue()
+		.SetInsets(B_USE_WINDOW_SPACING, B_USE_DEFAULT_SPACING,
+					B_USE_WINDOW_SPACING, B_USE_DEFAULT_SPACING)
+		.End();
 }
 
 TonerView::~TonerView()

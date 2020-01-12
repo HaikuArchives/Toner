@@ -14,7 +14,7 @@
 
 #include <Application.h>
 
-TonerWindow::TonerWindow() : BWindow(BRect(100, 100, 220, 170), "Toner v1.0", B_TITLED_WINDOW, B_NOT_RESIZABLE | B_WILL_ACCEPT_FIRST_CLICK)
+TonerWindow::TonerWindow() : BWindow(BRect(100, 100, 220, 170), "Toner v1.0", B_TITLED_WINDOW, B_NOT_RESIZABLE | B_WILL_ACCEPT_FIRST_CLICK |  B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	TonerView *theView = new TonerView( Bounds() );
 	AddChild(theView);
