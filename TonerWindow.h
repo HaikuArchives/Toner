@@ -1,7 +1,7 @@
 /*
-	
+
 	TonerWindow.h
-	
+
 */
 /*
 	Originally written by Ben Loftis.
@@ -17,7 +17,7 @@
 class TonePlayer;
 class BMenuField;
 
-class TonerWindow : public BWindow  
+class TonerWindow : public BWindow
 {
 public:
 					TonerWindow();

@@ -1,7 +1,7 @@
 /*
-	
+
 	TonerApp.cpp
-	
+
 */
 /*
 	Originally written by Ben Loftis.
@@ -14,7 +14,7 @@
 #include <Alert.h>
 
 int main(int, char**)
-{	
+{
 	TonerApp myApplication;
 	myApplication.Run();
 	return(0);

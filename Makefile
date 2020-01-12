@@ -64,17 +64,17 @@ LIBS = be root media game translation $(STDCPPLIBS)
 #	to the Makefile. The paths included are not parsed recursively, so
 #	include all of the paths where libraries must be found. Directories where
 #	source files were specified are	automatically included.
-LIBPATHS = 
+LIBPATHS =
 
 #	Additional paths to look for system headers. These use the form
 #	"#include <header>". Directories that contain the files in SRCS are
 #	NOT auto-included here.
-SYSTEM_INCLUDE_PATHS = 
+SYSTEM_INCLUDE_PATHS =
 
 #	Additional paths paths to look for local headers. These use the form
 #	#include "header". Directories that contain the files in SRCS are
 #	automatically included.
-LOCAL_INCLUDE_PATHS = 
+LOCAL_INCLUDE_PATHS =
 
 #	Specify the level of optimization that you want. Specify either NONE (O0),
 #	SOME (O1), FULL (O2), or leave blank (for the default optimization level).
@@ -85,32 +85,32 @@ OPTIMIZE := FULL
 # 	will recreate only the "locales/en.catkeys" file. Use it as a template
 # 	for creating catkeys for other languages. All localization files must be
 # 	placed in the "locales" subdirectory.
-LOCALES = 
+LOCALES =
 
 #	Specify all the preprocessor symbols to be defined. The symbols will not
 #	have their values set automatically; you must supply the value (if any) to
 #	use. For example, setting DEFINES to "DEBUG=1" will cause the compiler
 #	option "-DDEBUG=1" to be used. Setting DEFINES to "DEBUG" would pass
 #	"-DDEBUG" on the compiler's command line.
-DEFINES = 
+DEFINES =
 
 #	Specify the warning level. Either NONE (suppress all warnings),
 #	ALL (enable all warnings), or leave blank (enable default warnings).
-WARNINGS = 
+WARNINGS =
 
 #	With image symbols, stack crawls in the debugger are meaningful.
 #	If set to "TRUE", symbols will be created.
-SYMBOLS := 
+SYMBOLS :=
 
 #	Includes debug information, which allows the binary to be debugged easily.
 #	If set to "TRUE", debug info will be created.
-DEBUGGER := 
+DEBUGGER :=
 
 #	Specify any additional compiler flags to be used.
 COMPILER_FLAGS = -Woverloaded-virtual -funsigned-bitfields -Wwrite-strings
 
 #	Specify any additional linker flags to be used.
-LINKER_FLAGS = 
+LINKER_FLAGS =
 
 #	(Only used when "TYPE" is "DRIVER"). Specify the desired driver install
 #	location in the /dev hierarchy. Example:
@@ -118,7 +118,7 @@ LINKER_FLAGS =
 #	will instruct the "driverinstall" rule to place a symlink to your driver's
 #	binary in ~/add-ons/kernel/drivers/dev/video/usb, so that your driver will
 #	appear at /dev/video/usb when loaded. The default is "misc".
-DRIVER_PATH = 
+DRIVER_PATH =
 
 ## Include the Makefile-Engine
 DEVEL_DIRECTORY := \

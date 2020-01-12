@@ -1,7 +1,7 @@
 /*
-	
+
 	TonePlayer.h
-	
+
 */
 /*
 	Originally written by Ben Loftis.
@@ -9,7 +9,7 @@
 	If you use this source extensively in your project, I humbly request that you credit me in your program.
 */
 
-#include <SoundPlayer.h> 
+#include <SoundPlayer.h>
 
 #ifndef TONE_PLAYER_H
 #define TONE_PLAYER_H
@@ -20,7 +20,7 @@
 class TonePlayer : public BSoundPlayer
 {
 public:
-					TonePlayer(void); 
+					TonePlayer(void);
 	void			SetNoise(bool inNoise);
 	void			SetFrequency(int16 inFreq);
 	void			SetLevel(int16 inLevel_dB);
